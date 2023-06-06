@@ -41,7 +41,7 @@ func CreateTask(c *gin.Context) {
 	}
 
 	// Create task
-	task := models.Task{Title: input.Title}
+	task := models.Task{Title: input.Title, Daily: input.Daily, EndDate: input.EndDate}
 	models.DB.Create(&task)
 
 	c.JSON(http.StatusOK, gin.H{"data": task})

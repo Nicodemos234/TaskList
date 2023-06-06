@@ -10,20 +10,20 @@ type Task struct {
 	ID        uint `gorm:"primaryKey"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
-	EndDate   time.Time
-	Daily     bool
-	Title     string
+	EndDate   time.Time      `json:"endDate"`
+	Daily     bool           `json:"daily"`
+	Title     string         `json:"title"`
 	DeletedAt gorm.DeletedAt `gorm:"index"`
 }
 
 type CreateTaskInput struct {
-	Title   string
-	EndDate time.Time
-	Daily   bool
+	EndDate time.Time `json:"endDate"`
+	Daily   bool      `json:"daily"`
+	Title   string    `json:"title"`
 }
 
 type UpdateTaskInput struct {
-	Title   string
-	EndDate time.Time
-	Daily   bool
+	EndDate time.Time `json:"endDate"`
+	Daily   bool      `json:"daily"`
+	Title   string    `json:"title"`
 }
