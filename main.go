@@ -4,6 +4,8 @@ import (
 	"tasks/controllers"
 	"tasks/models"
 
+	"github.com/gin-contrib/cors"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,6 +14,11 @@ var db = make(map[string]string)
 func setupRouter() *gin.Engine {
 	r := gin.Default()
 
+	r.Use(cors.New(cors.Config{
+		AllowAllOrigins: true,
+		AllowHeaders:    []string{"content-type"},
+		AllowMethods:    []string{"POST", "DELETE", "GET", "PATCH"},
+	}))
 	r.GET("/tasks", controllers.FindTasks)
 	r.POST("/tasks", controllers.CreateTask)
 	r.GET("/tasks/:id", controllers.FindTask)
