@@ -1,8 +1,6 @@
 package main
 
 import (
-	"net/http"
-
 	"tasks/controllers"
 	"tasks/models"
 
@@ -12,20 +10,13 @@ import (
 var db = make(map[string]string)
 
 func setupRouter() *gin.Engine {
-	// Disable Console Color
-	// gin.DisableConsoleColor()
 	r := gin.Default()
-	r.LoadHTMLGlob("templates/*")
 
-	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl", gin.H{"title": "Main web"})
-	})
-
-	r.GET("/api/tasks", controllers.FindTasks)
-	r.POST("/api/tasks", controllers.CreateTask)
-	r.GET("/api/tasks/:id", controllers.FindTask)
-	r.PATCH("/api/tasks/:id", controllers.UpdateTask)
-	r.DELETE("/api/tasks/:id", controllers.DeleteTask)
+	r.GET("/tasks", controllers.FindTasks)
+	r.POST("/tasks", controllers.CreateTask)
+	r.GET("/tasks/:id", controllers.FindTask)
+	r.PATCH("/tasks/:id", controllers.UpdateTask)
+	r.DELETE("/tasks/:id", controllers.DeleteTask)
 
 	return r
 }

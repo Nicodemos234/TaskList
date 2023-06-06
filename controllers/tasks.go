@@ -30,15 +30,11 @@ func FindTask(c *gin.Context) { // Get model if exist
 	c.JSON(http.StatusOK, gin.H{"data": task})
 }
 
-type CreateTaskInput struct {
-	Title string `json:"title" binding:"required"`
-}
-
 // POST /api/tasks
 // Create new task
 func CreateTask(c *gin.Context) {
 	// Validate input
-	var input CreateTaskInput
+	var input models.CreateTaskInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -49,10 +45,6 @@ func CreateTask(c *gin.Context) {
 	models.DB.Create(&task)
 
 	c.JSON(http.StatusOK, gin.H{"data": task})
-}
-
-type UpdateTaskInput struct {
-	Title string `json:"title"`
 }
 
 // PATCH /api/tasks/:id
@@ -66,7 +58,7 @@ func UpdateTask(c *gin.Context) {
 	}
 
 	// Validate input
-	var input UpdateTaskInput
+	var input models.UpdateTaskInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
