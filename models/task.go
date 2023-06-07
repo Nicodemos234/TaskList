@@ -7,14 +7,14 @@ import (
 )
 
 type Task struct {
-	ID        uint `gorm:"primaryKey"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID        uint           `gorm:"primaryKey" json:"id"`
+	CreatedAt time.Time      `json:"createdAt"`
+	UpdatedAt time.Time      `json:"updatedAt"`
 	EndDate   time.Time      `json:"endDate"`
 	Daily     bool           `json:"daily"`
 	Done      bool           `json:"done"`
 	Title     string         `json:"title"`
-	DeletedAt gorm.DeletedAt `gorm:"index"`
+	DeletedAt gorm.DeletedAt `gorm:"index" json:"deletedAt"`
 }
 
 type CreateTaskInput struct {

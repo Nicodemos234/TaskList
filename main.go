@@ -5,6 +5,7 @@ import (
 	"tasks/models"
 
 	"github.com/gin-contrib/cors"
+	"github.com/joho/godotenv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -29,6 +30,9 @@ func setupRouter() *gin.Engine {
 }
 
 func main() {
+	// Load the .env file in the current directory
+	godotenv.Load()
+
 	r := setupRouter()
 
 	models.ConnectDatabase() // new
