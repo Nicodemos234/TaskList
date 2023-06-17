@@ -64,7 +64,11 @@ func UpdateTask(c *gin.Context) {
 		return
 	}
 
-	models.DB.Model(&task).Updates(input)
+	models.DB.Model(&task).Updates(map[string]interface{}{
+		"EndDate": input.EndDate,
+		"Daily":   input.Daily,
+		"Title":   input.Title,
+		"Done":    input.Done})
 
 	c.JSON(http.StatusOK, gin.H{"data": task})
 }
